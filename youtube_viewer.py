@@ -26,8 +26,11 @@ import json
 import logging
 import re
 import textwrap
+import sched
+import time
+import asyncio
 from concurrent.futures import ThreadPoolExecutor, wait
-from time import gmtime, sleep, strftime, time
+from time import gmtime, sleep, strftime
 
 import psutil
 from fake_headers import Headers, browsers
@@ -142,6 +145,7 @@ Patcher.patch_exe = monkey_patch_exe
 def timestamp():
     global date_fmt
     date_fmt = datetime.now().strftime("%d-%b-%Y %H:%M:%S")
+    cpu = str(psutil.cpu_percent(0.2))
     return bcolors.OKGREEN + f'[{date_fmt}] | ' + bcolors.OKCYAN + f'{cpu_usage} | '
 
 
@@ -868,13 +872,11 @@ def view_video(position):
                 main_viewer('socks4', proxy, position)
             if checked[position] == 'socks4':
                 main_viewer('socks5', proxy, position)
-
-
+    
 def main():
     global cancel_all, proxy_list, total_proxies, proxies_from_api, threads, hash_config, futures, cpu_usage
-
     cancel_all = False
-    start_time = time()
+    start_time = time.time()
     hash_config = get_hash(config_path)
 
     proxy_list = get_proxy_list()
@@ -914,13 +916,10 @@ def main():
 
                 loop += 1
                 for _ in range(70):
-                    cpu = str(psutil.cpu_percent(0.2))
+                    cpuNum = psutil.cpu_percent(0.2)
+                    cpu = str(cpuNum)
                     cpu_usage = cpu + '%' + ' ' * \
                         (5-len(cpu)) if cpu != '0.0' else cpu_usage
-                    if (cpu >= 95):
-                        subprocess.call("taskkill /F /IM chrome.exe")
-                        subprocess.call("taskkill /F /IM chromedriver.exe")
-
 
                 if loop % 40 == 0:
                     print(tabulate(video_statistics.items(),
@@ -978,9 +977,8 @@ def main():
             cancel_pending_task(not_done=not_done)
             raise KeyboardInterrupt
 
-
 if __name__ == '__main__':
-
+    #subprocess.Popen('RestartChrome.py', shell=True)
     clean_exe_temp(folder='youtube_viewer')
     date_fmt = datetime.now().strftime("%d-%b-%Y %H:%M:%S")
     cpu_usage = str(psutil.cpu_percent(1))
@@ -1004,11 +1002,11 @@ if __name__ == '__main__':
             print(json.dumps(config, indent=4))
             print(bcolors.OKCYAN + 'Config file exists! Program will start automatically after 2 seconds...' + bcolors.ENDC)
             print(bcolors.FAIL + 'If you want to create a new config file PRESS CTRL+C within 2 seconds!' + bcolors.ENDC)
-            start = time() + 2
+            start = time.time() + 2
             try:
                 i = 0
                 while i < 10:
-                    print(bcolors.OKBLUE + f"{start - time():.0f} seconds remaining " +
+                    print(bcolors.OKBLUE + f"{start - time.time():.0f} seconds remaining " +
                           animation[i % len(animation)] + bcolors.ENDC, end="\r")
                     i += 1
                     sleep(0.2)
