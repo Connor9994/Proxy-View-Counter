@@ -11,7 +11,7 @@
     "proxy": {
         "category": "f",
         "proxy_type": "http",
-        "filename": "C:\\Users\\Connor\\Desktop\\YouTube-Viewer-master\\proxyscrape_premium_http_proxies.txt",
+        "filename": "C:\\Users\\Name\\Desktop\\YouTube-Viewer\\proxyscrape_premium_http_proxies.txt",
         "authentication": false,
         "proxy_api": false,
         "refresh": 0.0
