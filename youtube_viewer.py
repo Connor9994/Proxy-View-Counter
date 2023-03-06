@@ -998,12 +998,12 @@ if __name__ == '__main__':
 
         if len(config) == 11:
             print(json.dumps(config, indent=4))
-            print(bcolors.OKCYAN + 'Config file exists! Program will start automatically after 20 seconds...' + bcolors.ENDC)
-            print(bcolors.FAIL + 'If you want to create a new config file PRESS CTRL+C within 20 seconds!' + bcolors.ENDC)
-            start = time() + 20
+            print(bcolors.OKCYAN + 'Config file exists! Program will start automatically after 2 seconds...' + bcolors.ENDC)
+            print(bcolors.FAIL + 'If you want to create a new config file PRESS CTRL+C within 2 seconds!' + bcolors.ENDC)
+            start = time() + 2
             try:
                 i = 0
-                while i < 96:
+                while i < 10:
                     print(bcolors.OKBLUE + f"{start - time():.0f} seconds remaining " +
                           animation[i % len(animation)] + bcolors.ENDC, end="\r")
                     i += 1
