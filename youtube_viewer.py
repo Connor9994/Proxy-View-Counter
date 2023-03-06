@@ -226,33 +226,15 @@ def detect_file_change():
 def direct_or_search(position):
     keyword = None
     video_title = None
-    if position % 2:
-        try:
-            method = 1
-            url = choice(urls)
-            if 'music.youtube.com' in url:
-                youtube = 'Music'
-            else:
-                youtube = 'Video'
-        except IndexError:
-            raise Exception("Your urls.txt is empty!")
-
-    else:
-        try:
-            method = 2
-            query = choice(queries)
-            keyword = query[0]
-            video_title = query[1]
-            url = "https://www.youtube.com"
+    try:
+        method = 1
+        url = choice(urls)
+        if 'music.youtube.com' in url:
+            youtube = 'Music'
+        else:
             youtube = 'Video'
-        except IndexError:
-            try:
-                youtube = 'Music'
-                url = choice(urls)
-                if 'music.youtube.com' not in url:
-                    raise Exception
-            except Exception:
-                raise Exception("Your search.txt is empty!")
+    except IndexError:
+        raise Exception("Your urls.txt is empty!")
 
     return url, method, youtube, keyword, video_title
 
