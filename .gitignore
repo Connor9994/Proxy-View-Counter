@@ -8,3 +8,5 @@ config.json
 chromedriver.exe
 version.txt
 *.log
+urls.txt
+config.json
