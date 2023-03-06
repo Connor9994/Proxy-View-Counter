@@ -917,7 +917,7 @@ def main():
                     cpu = str(psutil.cpu_percent(0.2))
                     cpu_usage = cpu + '%' + ' ' * \
                         (5-len(cpu)) if cpu != '0.0' else cpu_usage
-                    if (cpu_usage >= 90):
+                    if (cpu >= 95):
                         subprocess.call("taskkill /F /IM chrome.exe")
                         subprocess.call("taskkill /F /IM chromedriver.exe")
 
