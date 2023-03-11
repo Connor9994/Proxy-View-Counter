@@ -1,0 +1,26 @@
+{
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "short_name": "defender",
+  "name": "Fingerprint Defender",
+  "permissions": [
+    "storage"
+  ],
+  "description": "Defending against canvas, font, webgl, audiocontext fingerprinting by reporting a fake value.",
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "*://*/*"
+      ],
+      "match_about_blank": true,
+      "run_at": "document_start",
+      "js": [
+        "canvas.js",
+        "font.js",
+        "webgl.js",
+        "audiocontext.js"
+      ]
+    }
+  ]
+}

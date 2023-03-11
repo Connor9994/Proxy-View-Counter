@@ -103,6 +103,7 @@ def get_driver(background, viewports, agent, auth_required, path, proxy, proxy_t
         "excludeSwitches", ["enable-automation", "enable-logging"])
     options.add_experimental_option('useAutomationExtension', False)
     prefs = {"intl.accept_languages": 'en_US,en',
+             "profile.managed_default_content_settings.images": 2,
              "credentials_enable_service": False,
              "profile.password_manager_enabled": False,
              "profile.default_content_setting_values.notifications": 2,
